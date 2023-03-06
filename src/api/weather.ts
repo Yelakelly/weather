@@ -9,7 +9,9 @@ interface WeatherOptions {
 
 export const weatherApi = createApi({
   reducerPath: 'weather',
-  baseQuery: fetchBaseQuery({ baseUrl: '/weather/v2' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: '/api',
+  }),
   endpoints: builder => ({
     getForecast: builder.query<WeatherApiResponse, WeatherOptions>({
       query: (options: WeatherOptions) => ({

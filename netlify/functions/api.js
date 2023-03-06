@@ -1,6 +1,10 @@
+const serverless = require('serverless-http');
+const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function (app) {
+export async function handler(event, context) {
+  const app = express();
+
   app.use(
     '/api',
     createProxyMiddleware({
@@ -14,4 +18,6 @@ module.exports = function (app) {
       },
     }),
   );
-};
+
+  return serverless(app)(event, context);
+}
