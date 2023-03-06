@@ -39,6 +39,7 @@ const initialState: GeoPositionState = {
       id: uuid(),
       name: 'По умолчанию',
       edit: false,
+      new: false,
       default: true,
       coords: {
         latitude: 0,
@@ -129,7 +130,7 @@ export const geoPositionSlice = createSlice({
     setSelectedPosition: (state, action: PayloadAction<string>) => {
       state.selectedPosition = action.payload;
     },
-    refreshPosition: (state) => {
+    refreshPosition: state => {
       const positions = state.positions;
       const activePosition = positions.find(obj => obj.id === state.selectedPosition);
 

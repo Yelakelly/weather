@@ -3,10 +3,11 @@ import ruRu from 'antd/lib/locale/ru_RU';
 import { ConfigProvider } from 'antd';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { persistor, store } from './store';
 import App from './app';
 import reportWebVitals from './reportWebVitals';
 import 'theme/style.css';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <ConfigProvider locale={ruRu}>
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </ConfigProvider>
   </React.StrictMode>,
