@@ -111,16 +111,22 @@ export function PositionEditor() {
       <List.Item>
         <Form<FormValues>
           onFinish={onPositionEdit}
-          style={{ marginTop: '10px' }}
+          style={{ margin: '10px 0 0 0' }}
           size={'small'}
           labelCol={{ offset: 0 }}
           initialValues={{
             ...item,
           }}
         >
-          <Form.Item name={'id'} hidden />
-          <Form.Item name={'new'} hidden />
-          <Form.Item name={'edit'} hidden />
+          <Form.Item name={'id'} hidden>
+            <Input />
+          </Form.Item>
+          <Form.Item name={'new'} hidden>
+            <Input />
+          </Form.Item>
+          <Form.Item name={'edit'} hidden>
+            <Input />
+          </Form.Item>
           <Space align={'start'} style={{ overflow: 'hidden' }}>
             <div>
               <Typography.Text strong>Имя</Typography.Text>
@@ -173,7 +179,7 @@ export function PositionEditor() {
               </Form.Item>
             </div>
           </Space>
-          <div style={{ margin: ' 0 0 10px 0' }}>
+          <div style={{ margin: '0 0 10px 0' }}>
             <Space>
               <Button type={'primary'} htmlType={'submit'}>
                 Сохранить
@@ -217,22 +223,7 @@ export function PositionEditor() {
 
   return (
     <>
-      {!isSelectMode && (
-        <Space size={15} style={{ padding: '0 0 15px 0' }} wrap>
-          <span>
-            Текущая позиция: &nbsp;
-            {renderPosition()}
-          </span>
-          {!positionLoading && !isLoading && (
-            <>
-              <Button type="primary" icon={<SelectOutlined />} size="small" onClick={onOpen}>
-                Заменить
-              </Button>
-            </>
-          )}
-        </Space>
-      )}
-      {isSelectMode && (
+      {isSelectMode ? (
         <>
           <div>
             <Typography.Text strong>Выбор позиции</Typography.Text>
@@ -260,6 +251,20 @@ export function PositionEditor() {
             </Button>
           </div>
         </>
+      ) : (
+        <Space size={15} style={{ padding: '0 0 15px 0' }} wrap>
+          <span>
+            Текущая позиция: &nbsp;
+            {renderPosition()}
+          </span>
+          {!positionLoading && !isLoading && (
+            <>
+              <Button type="primary" icon={<SelectOutlined />} size="small" onClick={onOpen}>
+                Заменить
+              </Button>
+            </>
+          )}
+        </Space>
       )}
     </>
   );
